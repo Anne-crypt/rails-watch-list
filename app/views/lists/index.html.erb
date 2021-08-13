@@ -4,14 +4,25 @@
 <%# itere
 si clique sur un, affiche la show
 la show avec le bookmark %>
+<div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1628769552635-df0b10e5e86d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=752&q=80')">
+</div>
+
+
+
+<p><%= link_to "Add a list", new_list_path %></p>
 
   <% @lists.each do |list| %>
 
-<div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg)">
-  <%= link_to list.name, list_path(list) %>
-</div>
+  <% if list.photo.attached? %>
+
+  <%= cl_image_tag(list.photo.key,
+      width: 400, height: 300, crop: :fill) %>
+  <% else %>
+
+  <%= cl_image_tag("tpo8groas9fbf2iouzbe",
+      width: 400, height: 300, crop: :fill) %>
   <% end %>
 
+  <%= link_to list.name, list_path(list) %>
 
-
-<%= link_to "Add a list", new_list_path %>
+  <% end %>
